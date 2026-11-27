@@ -204,6 +204,12 @@ catalog:
       rules:
         - allow: [User, Group]
 
+    # Catálogo do laboratório "Lab 4" (Puc-Minas)
+    - type: file
+      target: ../../catalog/all-components.yaml
+      rules:
+        - allow: [Component, System, API, Resource, Location, Group,User]
+
     ## Uncomment these lines to add more example data
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml

@@ -1,0 +1,75 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: checkout-system
+  description: Sistema de checkout da loja fictícia
+spec:
+  owner: group:time-backend
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: payments-db
+  description: Banco de dados PostgreSQL de pagamentos
+spec:
+  type: database
+  owner: group:time-backend
+  system: checkout-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: payments-api
+  description: API REST para processamento de pagamentos
+spec:
+  type: openapi
+  lifecycle: production
+  owner: group:time-backend
+  system: checkout-system
+  definition: |
+    openapi: "3.0.0"
+    info:
+      title: Payments API
+      version: "1.0.0"
+    paths:
+      /payments:
+        post:
+          summary: Processa um pagamento
+          responses:
+            "201":
+              description: Pagamento criado
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: payment-api
+  title: Payment API
+  description: Serviço responsável por processar pagamentos
+  tags:
+    - python
+    - payments
+spec:
+  type: service
+  lifecycle: production
+  owner: group:time-backend
+  system: checkout-system
+  providesApis:
+    - payments-api
+  dependsOn:
+    - resource:payments-db
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: checkout-web
+  title: Checkout Web
+  description: Interface web do checkout
+  tags:
+    - frontend
+spec:
+  type: website
+  lifecycle: experimental
+  owner: group:time-frontend
+  system: checkout-system
+  consumesApis:
+    - payments-api

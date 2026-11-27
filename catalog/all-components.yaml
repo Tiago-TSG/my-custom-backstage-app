@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: local-catalog
+  description: Catálogo local do laboratório
+spec:
+  targets:
+    - ./groups.yaml
+    - ./services.yaml

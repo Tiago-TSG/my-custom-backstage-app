@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: time-backend
+  description: Time responsável pelos serviços de backend
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: time-frontend
+  description: Time responsável pelo frontend
+spec:
+  type: team
+  children: []
