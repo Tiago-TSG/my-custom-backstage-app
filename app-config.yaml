@@ -210,6 +210,12 @@ catalog:
       rules:
         - allow: [Component, System, API, Resource, Location, Group,User]
 
+    # Template do laboratório "Lab 5" (Puc-Minas)
+    - type: file
+      target: ../../templates/python-service/template.yaml
+      rules:
+        - allow: [Template]
+
     ## Uncomment these lines to add more example data
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
